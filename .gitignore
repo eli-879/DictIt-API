@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/DictIt-API/FileContentIndex
+/.vs/DictIt-API/v17
+/dictit-api/.vs/dictit-api/FileContentIndex
+/dictit-api/.vs/dictit-api/DesignTimeBuild
+/dictit-api/.vs/dictit-api/v17
+/dictit-api/dictit-api/bin/Debug/net9.0
