@@ -1,6 +1,6 @@
-﻿using DictItApi.Services;
+﻿using DictItApi.Entities;
+using DictItApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace DictItApi.Controllers;
 
@@ -16,9 +16,17 @@ public class SearchDefinitionController : ControllerBase
 
     // GET search/hello
     [HttpGet("{word}")]
-    public async Task<IActionResult> Get(string word)
+    public async Task<ActionResult<DictionaryEntry>> Get(string word)
     {
-        var wordDefinition = await _dictionaryService.GetWordDefinitionAsync(word);
-        return Ok(wordDefinition);
+        
+        var wordDefinitionResult = await _dictionaryService.GetWordDefinitionAsync(word);
+        if (!wordDefinitionResult.IsSuccess)
+        {
+            return NotFound($"Couldn't find word: {word}");
+        }
+
+        return Ok(wordDefinitionResult.Value);
+
+
     }
 }

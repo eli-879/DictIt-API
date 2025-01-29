@@ -1,7 +1,9 @@
-﻿namespace DictItApi.Services
+﻿using DictItApi.Entities;
+using DictItApi.Result;
+
+namespace DictItApi.Services;
+
+public interface IDictionaryService
 {
-    public interface IDictionaryService
-    {
-        Task<string> GetWordDefinitionAsync(string word);
-    }
+    Task<Result<DictionaryAPIResponseDto>> GetWordDefinitionAsync(string word);
 }

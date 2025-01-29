@@ -1,6 +1,9 @@
 @dictit_api_HostAddress = http://localhost:5261
 
-GET {{dictit_api_HostAddress}}/search/hello
+GET {{dictit_api_HostAddress}}/search/ass
 Accept: application/json
 
 ###
+
+GET {{dictit_api_HostAddress}}/search/helloasdfsfeesf
+Accept: application/json

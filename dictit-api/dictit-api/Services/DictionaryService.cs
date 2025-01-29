@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Options;
+﻿using DictItApi.Entities;
+using DictItApi.Result;
+using Microsoft.Extensions.Options;
+using System.Net;
+using System.Text.Json;
 
 namespace DictItApi.Services;
 
@@ -13,13 +17,28 @@ public class DictionaryService : IDictionaryService
         _settings = apiSettings.Value;
     }
 
-    public async Task<string> GetWordDefinitionAsync(string word)
+    public async Task<Result<DictionaryAPIResponseDto>> GetWordDefinitionAsync(string word)
     {
         var apiUrl = $"{_settings.DictionaryApiBase}/{word}";
 
-        var response = await _httpClient.GetAsync(apiUrl);
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync();
+        try
+        {
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            var entry = JsonSerializer.Deserialize<List<DictionaryEntry>>(content);
+            var returnObject = new DictionaryAPIResponseDto()
+            {
+                Entries = entry.ToArray()
+            };
 
+
+            return Result<DictionaryAPIResponseDto>.Success(returnObject);
+
+        }
+        catch (HttpRequestException ex) 
+        {
+            return Result<DictionaryAPIResponseDto>.Failure(ex.StatusCode ?? HttpStatusCode.InternalServerError, ex.Message);
+        }
     }
 }
