@@ -7,3 +7,13 @@ Accept: application/json
 
 GET {{dictit_api_HostAddress}}/search/helloasdfsfeesf
 Accept: application/json
+
+###
+
+POST {{dictit_api_HostAddress}}/save-word
+Content-Type: application/json
+Accept: application/json
+{
+  "Word": "ass",
+  "UserId": "dd88c74e-d265-4e8b-b990-3d90bc1cde50"
+}

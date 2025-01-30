@@ -1,4 +1,5 @@
-﻿using DictItApi.Entities;
+﻿using DictItApi.Dtos;
+using DictItApi.Entities;
 using DictItApi.Result;
 using Microsoft.Extensions.Options;
 using System.Net;
@@ -31,7 +32,6 @@ public class DictionaryService : IDictionaryService
             {
                 Entries = entry.ToArray()
             };
-
 
             return Result<DictionaryAPIResponseDto>.Success(returnObject);
 

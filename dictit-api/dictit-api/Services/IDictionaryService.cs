@@ -1,4 +1,4 @@
-﻿using DictItApi.Entities;
+﻿using DictItApi.Dtos;
 using DictItApi.Result;
 
 namespace DictItApi.Services;

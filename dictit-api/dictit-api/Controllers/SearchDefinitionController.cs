@@ -26,7 +26,5 @@ public class SearchDefinitionController : ControllerBase
         }
 
         return Ok(wordDefinitionResult.Value);
-
-
     }
 }

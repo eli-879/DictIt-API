@@ -1,4 +1,5 @@
 using DictItApi;
+using DictItApi.Database;
 using DictItApi.Entities;
 using DictItApi.Extensions;
 using DictItApi.Repository;
@@ -26,7 +27,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
+builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme, options => options.LoginPath ="/Wow");
 
 builder.Services.AddIdentityCore<User>()
     .AddEntityFrameworkStores<UsersDbContext>()
@@ -37,10 +38,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
-builder.Services.AddSingleton<IDictionaryService, DictionaryService>();
 
 builder.Services.AddDbContext<UsersDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<SaveWordDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+builder.Services.AddScoped<IDictionaryService, DictionaryService>();
+builder.Services.AddScoped<ISaveWordService, SaveWordService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿namespace DictItApi.Entities;
+﻿using DictItApi.Entities;
+
+namespace DictItApi.Dtos;
 
 public class DictionaryAPIResponseDto
 {
