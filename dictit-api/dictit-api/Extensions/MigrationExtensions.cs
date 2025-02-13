@@ -1,4 +1,4 @@
-﻿using DictItApi.Repository;
+﻿using DictItApi.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace DictItApi.Extensions;
@@ -9,7 +9,7 @@ public static class MigrationExtensions
     {
         using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-        using UsersDbContext context = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+        using DictItDbContext context = scope.ServiceProvider.GetRequiredService<DictItDbContext>();
 
         var pendingMigrations = context.Database.GetPendingMigrations();
 

@@ -10,10 +10,17 @@ Accept: application/json
 
 ###
 
-POST {{dictit_api_HostAddress}}/save-word
+GET {{dictit_api_HostAddress}}/saved-words/33199900-1589-4f1a-9321-005a252b40ef
 Content-Type: application/json
 Accept: application/json
+
+###
+
+POST {{dictit_api_HostAddress}}/saved-words
+Content-Type: application/json
+Accept: application/json
+
 {
-  "Word": "ass",
-  "UserId": "dd88c74e-d265-4e8b-b990-3d90bc1cde50"
+  "Word": "huge",
+  "UserId": "33199900-1589-4f1a-9321-005a252b40ef"
 }

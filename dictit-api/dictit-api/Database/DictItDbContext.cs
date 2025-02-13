@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DictItApi.Repository;
+namespace DictItApi.Database;
 
-public class UsersDbContext : IdentityDbContext<User>
+public class DictItDbContext : IdentityDbContext<User>
 {
-    public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options) { }
+    public DictItDbContext(DbContextOptions<DictItDbContext> options) : base(options) { }
+    public DbSet<SavedWord> SavedWords { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
-        builder.HasDefaultSchema("identity");
     }
 }
