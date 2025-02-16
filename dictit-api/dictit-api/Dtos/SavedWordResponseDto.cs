@@ -2,5 +2,7 @@
 
 public class SavedWordResponseDto
 {
-    public string Word { get; set; } = string.Empty;
+    public List<SavedWordDto> SavedWords { get; set; } = [];
+
+    public int ResultsLength { get; set; }
 }

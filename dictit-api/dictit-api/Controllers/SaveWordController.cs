@@ -19,7 +19,12 @@ namespace DictItApi.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult> GetAllSavedWords()
+        public async Task<ActionResult> GetSavedWordPage(
+            [FromQuery(Name = "sort")] string sort, 
+            [FromQuery(Name = "order")] string order, 
+            [FromQuery(Name = "page")] int page,
+            [FromQuery(Name = "numPerPage")] int numPerPage,
+            [FromQuery(Name = "filter")] string? filter = null)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -28,7 +33,7 @@ namespace DictItApi.Controllers
                 return Unauthorized();
             }
 
-            var savedWordsResult = await _savedWordService.GetSavedWordsByUser(userId);
+            var savedWordsResult = await _savedWordService.GetSavedWordsByUser(userId, filter, sort, order, page, numPerPage);
 
             if (!savedWordsResult.IsSuccess)
             {
@@ -55,7 +60,7 @@ namespace DictItApi.Controllers
                 // TODO Different HTTP codes for different errors.
                 return BadRequest();
             }
-            return Ok();
+            return Ok(saveWordResult.Value);
         }
 
         [HttpDelete("")]
